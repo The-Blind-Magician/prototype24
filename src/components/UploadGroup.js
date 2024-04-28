@@ -1,7 +1,5 @@
 import React from "react";
 import FileIOButton from "./FileIOButton";
-// import { Blue } from "../theme/Colors";
-
 
 class UploadGroup extends React.Component {
     constructor(props) {
@@ -22,11 +20,21 @@ class UploadGroup extends React.Component {
                 const text = await file.text();
                 this.setState({fileName: file.name});
                 this.setState({fileText: text});
+
+                /*
+                This is a callback function that is passed from the parent component.
+                This will pass the file name and text to the parent component 
+                which will then update the state of the TextBoxWrapper component.
+                */
                 this.props.onFileChange(file.name, text);
             }
         }
     }
 
+    /*
+    This simulates a click on the "inputElement" element,
+    which is invisible to the user, triggering a file selection dialog.
+    */
     uploadFileDialog(event) {
         this.inputElement.click();
     }
@@ -42,11 +50,16 @@ class UploadGroup extends React.Component {
     uploadGroupStyle = {
         display: 'flex',
         flexDirection: 'column',
-        // justifyContent: 'space-around',
         width: 'fit-content',
         gap: '0px',
     };
 
+    /*
+    The .bind method passes a pseudo-copy of the function to 
+    the FileIOButton component, maintaining UploadGroup's ownership.
+    Processing will be delegated back to UploadGroup's method with respect to it's own context.
+    All arguments are passed through the "event" parameter.
+    */
     render() {
         return (
             <div style={this.uploadGroupStyle}>

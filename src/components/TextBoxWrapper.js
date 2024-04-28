@@ -19,7 +19,7 @@ class TextBoxWrapper extends React.Component {
     textBoxStyle = {
         "flex": "1 0 auto",
         resize: 'none',
-        backgroundColor: Blue.primaryLight,
+        // backgroundColor: Blue.primaryLight,
     };
 
     render() {

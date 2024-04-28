@@ -13,16 +13,13 @@ class FileIOButton extends React.Component {
     buttonStyle = {
         width: '50px',
         height: '25px',
-        backgroundColor: Blue.secondaryDark,
+        // backgroundColor: Blue.secondaryDark,
         borderRadius: '5px',
     };
 
     wrapperStyle = {
         width: '100%',
         height: 'fit-content',
-        // add 10px between elements
-        // margin: '10px',
-        // marginTop: '3px',
         marginBottom: '2px',
         marginLeft: '10px',
         padding: '5px',
@@ -30,15 +27,12 @@ class FileIOButton extends React.Component {
         flexDirection: 'row',
         gap: '10px',
         borderRadius: '5px',
-        backgroundColor: Blue.primaryLight,
     };
 
     labelStyle = {
         width: 'inherit',
         height: 'fit-content',
-        // center text
         textAlign: 'left',
-        // make the text bold
         fontWeight: 'bold',
         color: Blue.secondaryDark
     };
@@ -48,12 +42,15 @@ class FileIOButton extends React.Component {
     }
 
     render() {
-        const buttonId = this.props.id + "Btn";
+
+        const buttonId = this.props.id + "-btn";
+        const wrapperId = this.props.id + "-wrapper";
+        const labelId = this.props.id + "-label";
 
         return (
-            <div style={this.wrapperStyle}>
-                <button style={this.buttonStyle} id={buttonId} onClick={this.ioHandlerFromParent}></button>
-                <div style={this.labelStyle}>{this.props.text}</div>
+            <div name={wrapperId} style={this.wrapperStyle}>
+                <button name={buttonId} style={this.buttonStyle} id={buttonId} onClick={this.ioHandlerFromParent}></button>
+                <div name={labelId} style={this.labelStyle}>{this.props.text}</div>
             </div>
         );
     }
