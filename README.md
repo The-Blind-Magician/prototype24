@@ -46,7 +46,9 @@ For instance, `UploadGroup.js` contains 3 buttons with an "ioHandler" field. The
 3. At it's core, this is still JS. Don't assume the code will behave as expected. See below:
 
 > ('0' <= null) => true
+>
 > ('0' >= null) => true
+>
 > ('0' == null) => false
 
 4. React won't solve all your problems magically. You still need CSS and HTML. 
