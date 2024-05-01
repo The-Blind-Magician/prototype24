@@ -1,5 +1,5 @@
 import React from "react";
-import { Blue } from "../theme/Colors";
+// import { Blue } from "../theme/Colors";
 
 class FileIOButton extends React.Component {
     constructor(props) {
@@ -22,7 +22,6 @@ class FileIOButton extends React.Component {
         height: 'fit-content',
         marginBottom: '2px',
         marginLeft: '10px',
-        padding: '5px',
         display: 'flex',
         flexDirection: 'row',
         gap: '10px',
@@ -34,7 +33,7 @@ class FileIOButton extends React.Component {
         height: 'fit-content',
         textAlign: 'left',
         fontWeight: 'bold',
-        color: Blue.secondaryDark
+        // color: Blue.secondaryDark
     };
 
     ioHandlerFromParent() {

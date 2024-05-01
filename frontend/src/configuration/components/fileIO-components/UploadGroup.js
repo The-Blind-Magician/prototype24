@@ -20,7 +20,8 @@ class UploadGroup extends React.Component {
                 const text = await file.text();
                 this.setState({fileName: file.name});
                 this.setState({fileText: text});
-
+                await this.state.fileName;
+                await this.state.fileText;
                 /*
                 This is a callback function that is passed from the parent component.
                 This will pass the file name and text to the parent component 
@@ -39,12 +40,13 @@ class UploadGroup extends React.Component {
         this.inputElement.click();
     }
 
-    moveFileToDevice(event) {
-        console.log("Moving contents:\n" + this.state.fileText);
-    }
+    async getFileFromDevice(event) {
+        const response = await fetch("https://crispy-spork-xv577wq4g4r36w94-5000.app.github.dev/api/getConfigFile");
+        const data = await response.json();
 
-    commitChanges(event) {
-        console.log("Committing changes:\n" + this.state.fileText);
+        this.setState({fileName: data.name});
+        this.setState({fileText: data.content});
+        this.props.onFileChange(data.name, data.content);
     }
 
     uploadGroupStyle = {
@@ -64,8 +66,7 @@ class UploadGroup extends React.Component {
         return (
             <div style={this.uploadGroupStyle}>
                 <FileIOButton id="fileInput" text="Upload YAML File" ioHandler={this.uploadFileDialog.bind(this)} />
-                <FileIOButton id="fileOutput" text="From Device" ioHandler={this.moveFileToDevice.bind(this)}/>
-                <FileIOButton id="commitChanges" text="Commit Changes" ioHandler={this.commitChanges.bind(this)}/>
+                <FileIOButton id="fileOutput" text="From Device" ioHandler={this.getFileFromDevice.bind(this)}/>
                 <span> </span>
             </div>
         );

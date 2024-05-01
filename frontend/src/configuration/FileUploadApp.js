@@ -1,16 +1,17 @@
 import './FileUploadApp.css';
 import React from 'react';
-import TextBoxWrapper from './components/TextBoxWrapper';
-import UploadGroup from './components/UploadGroup';
-import { Blue } from './theme/Colors';
+import { DateTime } from 'luxon';
+import TextBoxWrapper from './components/text-display-components/TextBoxWrapper';
+import UploadGroup from './components/fileIO-components/UploadGroup';
+// import { Blue } from '../theme/Colors';
 
 class FileUploadApp extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       file: null,
-      fileName: "",
-      fileText: "",
+      fileName: "Select a file...",
+      fileText: "Select a file...",
     };
   }
 
@@ -24,7 +25,7 @@ class FileUploadApp extends React.Component {
 
   headerStyle = {
     marginLeft: '10px',
-    color: Blue.secondaryDark,
+    // color: Blue.secondaryDark,
   };
 
   /*
@@ -35,9 +36,15 @@ class FileUploadApp extends React.Component {
   
   NOTE: It is necessary to bind the TextBoxWrapper.key to the file name to force a re-render.
   */
-  handleFileChange = (name, text) => {
+  handleFileChange = async (name, text) => {
     this.setState({fileName: name});
     this.setState({fileText: text});
+
+    await this.state.fileText;
+    await this.state.fileName;
+
+    // console.log("File name: " + this.state.fileName);
+    // console.log("File text: " + this.state.fileText);
   }
 
 
@@ -49,12 +56,14 @@ class FileUploadApp extends React.Component {
   NOTE: The file name and text are sent from the parent component to the TextBoxWrapper component, 
   not directly from the UploadGroup component.
   */
+
+  //TODO - There is an issue when you retrieve the file from the device, then try to upload a new file. The new file is not uploaded a vice versa. 
   render() {
     return (
       <div style={this.rootDivStyle}>
         <h1 style={this.headerStyle}>Load Configuration</h1>
-        <UploadGroup id="uploadGroup" fileName={this.state.fileName} onFileChange={this.handleFileChange}/>
-        <TextBoxWrapper id="tbWrapper" fileName={this.state.fileName} fileText={this.state.fileText} key={this.state.fileName}/>
+        <UploadGroup id="uploadGroup" fileName={this.state.fileName} onFileChange={this.handleFileChange} commitChanges={this.commitChanges}/>
+        <TextBoxWrapper id="tbWrapper" fileName={this.state.fileName} fileText={this.state.fileText} key={this.state.fileName + Date.now()}/>
       </div>
     );
   }
